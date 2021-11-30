@@ -1,0 +1,2748 @@
+{
+	"info": {
+		"_postman_id": "4660228d-9624-4f3c-8161-e6d4cd25cc70",
+		"name": "New Collect v.2.4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Авторизация",
+			"item": [
+				{
+					"name": "auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"session_token\", pm.response.json().session_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"factor_value\": \"123456\",\r\n    \"login\": \"testtetov\",\r\n    \"session_token\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://front-api-gate.dev.wl.devim.team/auth/signin",
+							"protocol": "https",
+							"host": [
+								"front-api-gate",
+								"dev",
+								"wl",
+								"devim",
+								"team"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth+sms",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"access_token\", pm.response.json().access_token);\r",
+									"pm.environment.set(\"refresh_token\", pm.response.json().refresh_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"factor_value\": \"123456\",\r\n    \"login\": \"testtetov\",\r\n    \"session_token\": \"{{session_token}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://front-api-gate.dev.wl.devim.team/auth/signin",
+							"protocol": "https",
+							"host": [
+								"front-api-gate",
+								"dev",
+								"wl",
+								"devim",
+								"team"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Работа с сотрудниками",
+			"item": [
+				{
+					"name": "Списки",
+					"item": [
+						{
+							"name": "Список статусов",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/employees/list/statuses",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"employees",
+										"list",
+										"statuses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Список ролей",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/employees/list/roles",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"employees",
+										"list",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Список групп назначений",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/employees/list/groups",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"employees",
+										"list",
+										"groups"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Создание сотрудника",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"try {\r",
+									"    // сохраняем uuid из json ответа в переменную окружения\r",
+									"    pm.environment.set(\"uuid_employee\", pm.response.json().payload.uuid);\r",
+									"} catch(e) {\r",
+									"    // выводим исключение в консоль\r",
+									"    console.log(e);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var status = [",
+									"    'active',",
+									"    'hospital',",
+									"    'holiday',",
+									"    'day_off',",
+									"    'maternity'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*status.length);",
+									"pm.environment.set(\"type\",status[randomNumber]);",
+									"var assign_groups = [",
+									"    '1',",
+									"    '2',",
+									"    '3',",
+									"    '7',",
+									"    '12'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*assign_groups.length);",
+									"pm.environment.set(\"groups\",assign_groups[randomNumber]);",
+									"var roles = [",
+									"    'collect',",
+									"    'court',",
+									"    'individual_businessman',",
+									"    'admin',",
+									"    'manager',",
+									"    'super_admin'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*roles.length);",
+									"pm.environment.set(\"roles_user\",roles[randomNumber]);",
+									"var first_name = [",
+									"    'Анна',",
+									"    'Артем',",
+									"    'Маша',",
+									"    'Саша',",
+									"    'Таня',",
+									"    'Игорь'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*first_name.length);",
+									"pm.environment.set(\"first_name\",first_name[randomNumber]);",
+									"var last_name = [",
+									"    'Бобров',",
+									"    'Сукнов',",
+									"    'Томсков',",
+									"    'Белов',",
+									"    'Шылова',",
+									"    'Мылова'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*last_name.length);",
+									"pm.environment.set(\"last_name\",last_name[randomNumber]);",
+									"var patronymic = [",
+									"    'Топ',",
+									"    'Соп',",
+									"    'Коп',",
+									"    'Моп',",
+									"    'Кроп',",
+									"    'Соп'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*patronymic.length);",
+									"pm.environment.set(\"patronymic\",patronymic[randomNumber]);",
+									"var city = [",
+									"    'Москва',",
+									"    'Омск',",
+									"    'Воронеж',",
+									"    'Ставрополь',",
+									"    'Пятигорск',",
+									"    'Астрахань'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*city.length);",
+									"pm.environment.set(\"city\",city[randomNumber]);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"{{first_name}}\",\n    \"last_name\": \"{{last_name}}\",\n    \"patronymic\": \"{{patronymic}}\",\n    \"phone\": \"{{$randomPhoneNumber}}\",\n    \"city\": \"{{city}}\",\n    \"roles\": [\n        \"{{roles_user}}\"\n    ],\n    \"assign_groups\": [\n        {{groups}}\n    ],\n    \"status\": \"{{type}}\",\n    \"is_distribution_member\": true,\n    \"is_admin\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/employees",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить инфу по аутентифицированному сотруднику",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"try {\r",
+									"    // сохраняем uuid из json ответа в переменную окружения\r",
+									"    pm.environment.set(\"uuid_employee\", pm.response.json().payload.uuid);\r",
+									"} catch(e) {\r",
+									"    // выводим исключение в консоль\r",
+									"    console.log(e);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/employees/me",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"employees",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Редактирование сотрудника",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"    pm.expect(pm.response.code).to.equal(204);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code !== 204) {\r",
+									"    // выводим исключение в консоль\r",
+									"    console.log(e);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"var status = [",
+									"    'active',",
+									"    'hospital',",
+									"    'holiday',",
+									"    'day_off',",
+									"    'maternity'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*status.length);",
+									"pm.environment.set(\"type\",status[randomNumber]);",
+									"var assign_groups = [",
+									"    '1',",
+									"    '2',",
+									"    '3',",
+									"    '7',",
+									"    '12'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*assign_groups.length);",
+									"pm.environment.set(\"groups\",assign_groups[randomNumber]);",
+									"var roles = [",
+									"    'collect',",
+									"    'court',",
+									"    'individual_businessman',",
+									"    'admin',",
+									"    'manager',",
+									"    'super_admin'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*roles.length);",
+									"pm.environment.set(\"roles_user\",roles[randomNumber]);",
+									"var first_name = [",
+									"    'Анна',",
+									"    'Артем',",
+									"    'Маша',",
+									"    'Саша',",
+									"    'Таня',",
+									"    'Игорь'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*first_name.length);",
+									"pm.environment.set(\"first_name\",first_name[randomNumber]);",
+									"var last_name = [",
+									"    'Бобров',",
+									"    'Сукнов',",
+									"    'Томсков',",
+									"    'Белов',",
+									"    'Шылова',",
+									"    'Мылова'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*last_name.length);",
+									"pm.environment.set(\"last_name\",last_name[randomNumber]);",
+									"var patronymic = [",
+									"    'Топ',",
+									"    'Соп',",
+									"    'Коп',",
+									"    'Моп',",
+									"    'Кроп',",
+									"    'Соп'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*patronymic.length);",
+									"pm.environment.set(\"patronymic\",patronymic[randomNumber]);",
+									"var city = [",
+									"    'Москва',",
+									"    'Омск',",
+									"    'Воронеж',",
+									"    'Ставрополь',",
+									"    'Пятигорск',",
+									"    'Астрахань'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*city.length);",
+									"pm.environment.set(\"city\",city[randomNumber]);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"{{first_name}}\",\n    \"last_name\": \"{{last_name}}\",\n    \"patronymic\": \"{{patronymic}}\",\n    \"phone\": \"{{$randomPhoneNumber}}\",\n    \"city\": \"{{city}}\",\n    \"roles\": [\n        \"{{roles_user}}\"\n    ],\n    \"assign_groups\": [\n        {{groups}}\n    ],\n    \"status\": \"{{type}}\",\n    \"is_distribution_member\": true,\n    \"is_admin\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/employees/{{uuid_employee}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"employees",
+								"{{uuid_employee}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Информация о сотруднике",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"if (pm.response.code !== 200) {",
+									"    // выводим исключение в консоль",
+									"    console.log(e);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/employees/{{uuid_employee}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"employees",
+								"{{uuid_employee}}"
+							],
+							"query": [
+								{
+									"key": null,
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Информация о списке сотрудников (+добавлять фильтры)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"if (pm.response.code !== 200) {",
+									"    // выводим исключение в консоль",
+									"    console.log(e);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/employees",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"employees"
+							],
+							"query": [
+								{
+									"key": "filter[statuses][]",
+									"value": "active",
+									"disabled": true
+								},
+								{
+									"key": "filter[statuses][]",
+									"value": "hospital",
+									"disabled": true
+								},
+								{
+									"key": "filter[city][]",
+									"value": "Ижевск",
+									"disabled": true
+								},
+								{
+									"key": "filter[is_admin][]",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "filter[assign_groups][]",
+									"value": "7",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "100",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "20",
+									"disabled": true
+								},
+								{
+									"key": "filter[type][]",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменить статус сотрудника",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.unset(\"type\")",
+									"var status = [",
+									"    'active',",
+									"    'hospital',",
+									"    'holiday',",
+									"    'day_off',",
+									"    'maternity'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*status.length);",
+									"pm.environment.set(\"type\",status[randomNumber]);",
+									"var from = [",
+									"    '2021-08-08',",
+									"    '2021-08-18',",
+									"    '2021-09-08',",
+									"    '2021-09-18',",
+									"    '2021-10-08'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*from.length);",
+									"pm.environment.set(\"from\",from[randomNumber]);",
+									"var to = [",
+									"    '2021-08-29',",
+									"    '2021-08-19',",
+									"    '2021-09-29',",
+									"    '2021-09-19',",
+									"    '2021-10-29'",
+									"];",
+									"var randomNumber = Math.floor(Math.random()*to.length);",
+									"pm.environment.set(\"to\",to[randomNumber]);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"    pm.expect(pm.response.code).to.equal(204);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code !== 204) {\r",
+									"    // выводим исключение в консоль\r",
+									"    console.log(e);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"{{type}}\",\n    \"does_not_work\": {\n        \"from\": \"{{from}}\",\n        \"to\": \"{{to}}\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/employees/{{uuid_employee}}/change_status",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"employees",
+								"{{uuid_employee}}",
+								"change_status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Договоры",
+			"item": [
+				{
+					"name": "Анкета заёмщика",
+					"item": [
+						{
+							"name": "Получить анкету",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/client-profile",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"client-profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавить телефон",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"try {",
+											"    // сохраняем uuid телефона из json ответа в переменную окружения",
+											"    pm.environment.set(\"uuid_phones\", pm.response.json().payload.uuid);",
+											"} catch(e) {",
+											"    // выводим исключение в консоль",
+											"    console.log(e);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n      \"type\": \"main\",\n      \"phone\": \"{{$randomPhoneNumber}}\",\n      \"note\": \"{{$randomCatchPhrase}}\"\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/client-profile/phones",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"client-profile",
+										"phones"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Редактировать телефон",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phone\": \"{{$randomPhoneNumber}}\",\n    \"type\": \"main\",\n    \"note\": \"{{$randomCatchPhrase}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/client-profile/phones/{{uuid_phones}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"client-profile",
+										"phones",
+										"{{uuid_phones}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Удалить телефон",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/client-profile/phones/{{uuid_phones}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"client-profile",
+										"phones",
+										"{{uuid_phones}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавить адрес",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"try {",
+											"    // сохраняем uuid адреса из json ответа в переменную окружения",
+											"    pm.environment.set(\"uuid_address\", pm.response.json().payload.uuid);",
+											"} catch(e) {",
+											"    // выводим исключение в консоль",
+											"    console.log(e);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var locality = [\r",
+											"    'г.Псков',\r",
+											"    'г.Москва',\r",
+											"    'г.Самара',\r",
+											"    'г.Благовещенск',\r",
+											"    'Г.Тысклов',\r",
+											"    'г.Бысов'\r",
+											"];\r",
+											"var randomNumber = Math.floor(Math.random()*locality.length);\r",
+											"pm.environment.set(\"locality\",locality[randomNumber]);\r",
+											"var region = [\r",
+											"    'Рандом',\r",
+											"    'Рандом',\r",
+											"    'Блала',\r",
+											"    'Савава',\r",
+											"    'тататат',\r",
+											"    'г.Бысов'\r",
+											"];\r",
+											"var randomNumber = Math.floor(Math.random()*region.length);\r",
+											"pm.environment.set(\"region\",region[randomNumber]);\r",
+											"var street = [\r",
+											"    'Победы',\r",
+											"    'Ветеранов',\r",
+											"    'Плесецкая',\r",
+											"    'Уточкина',\r",
+											"    'Стародеревенская',\r",
+											"    'Богатырская'\r",
+											"];\r",
+											"var randomNumber = Math.floor(Math.random()*street.length);\r",
+											"pm.environment.set(\"street\",street[randomNumber]);\r",
+											"var house = [\r",
+											"    '55',\r",
+											"    '74',\r",
+											"    '58',\r",
+											"    '22',\r",
+											"    '43',\r",
+											"    '99'\r",
+											"];\r",
+											"var randomNumber = Math.floor(Math.random()*house.length);\r",
+											"pm.environment.set(\"house\",house[randomNumber]);\r",
+											"var apartment = [\r",
+											"    '77',\r",
+											"    '88',\r",
+											"    '54',\r",
+											"    '66',\r",
+											"    '33',\r",
+											"    '11'\r",
+											"];\r",
+											"var randomNumber = Math.floor(Math.random()*apartment.length);\r",
+											"pm.environment.set(\"apartment\",apartment[randomNumber]);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n      \"type\": \"actual\",\n      \"country\": \"Россия\",\n      \"region\": \"{{region}}\",\n      \"locality\": \"{{locality}}\",\n      \"street\": \"{{street}}\",\n      \"house\": \"{{house}}\",\n      \"apartment\": \"{{apartment}}\"\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/client-profile/addresses",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"client-profile",
+										"addresses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Редактровать адрес",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n      \"type\": \"residence\",\n      \"country\": \"Россия\",\n      \"region\": \"Московская область\",\n      \"locality\": \"Зеленоград\",\n      \"street\": \"Ленина\",\n      \"house\": \"6\",\n      \"apartment\": null\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/client-profile/addresses/{{uuid_address}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"client-profile",
+										"addresses",
+										"{{uuid_address}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Удалить адрес",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/client-profile/addresses/{{uuid_address}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"client-profile",
+										"addresses",
+										"{{uuid_address}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавить контактное лица",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"try {",
+											"    // сохраняем uuid контакта из json ответа в переменную окружения",
+											"    pm.environment.set(\"uuid_contact\", pm.response.json().payload.uuid);",
+											"} catch(e) {",
+											"    // выводим исключение в консоль",
+											"    console.log(e);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var first_name = [\r",
+											"    'Анна',\r",
+											"    'Артем',\r",
+											"    'Маша',\r",
+											"    'Саша',\r",
+											"    'Таня',\r",
+											"    'Игорь'\r",
+											"];\r",
+											"var randomNumber = Math.floor(Math.random()*first_name.length);\r",
+											"pm.environment.set(\"first_name\",first_name[randomNumber]);\r",
+											"var patronymic = [\r",
+											"    'Топ',\r",
+											"    'Соп',\r",
+											"    'Коп',\r",
+											"    'Моп',\r",
+											"    'Кроп',\r",
+											"    'Соп'\r",
+											"];\r",
+											"var randomNumber = Math.floor(Math.random()*patronymic.length);\r",
+											"pm.environment.set(\"patronymic\",patronymic[randomNumber]);\r",
+											"var last_name = [\r",
+											"    'Бобров',\r",
+											"    'Сукнов',\r",
+											"    'Томсков',\r",
+											"    'Белов',\r",
+											"    'Шылова',\r",
+											"    'Мылова'\r",
+											"];\r",
+											"var randomNumber = Math.floor(Math.random()*last_name.length);\r",
+											"pm.environment.set(\"last_name\",last_name[randomNumber]);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\n      \"relation_type\": \"friend\",\n      \"first_name\": \"{{first_name}}\",\n      \"patronymic\": \"{{patronymic}}\",\n      \"last_name\": \"{{last_name}}\",\n      \"phone\": \"{{$randomPhoneNumber}}\",\n      \"email\": \"{{$randomEmail}}\",\n      \"note\": \"{{$randomCatchPhrase}}\"\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/client-profile/contacts",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"client-profile",
+										"contacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Редактировать контактное лицо",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\n      \"relation_type\": \"friend\",\n      \"first_name\": \"Петр\",\n      \"patronymic\": \"Сергеевич\",\n      \"last_name\": \"Иванов\",\n      \"phone\": \"79001231313\",\n      \"email\": \"petr@example.com\",\n      \"note\": \"работает с заемщиком\"\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/client-profile/contacts/{{uuid_contact}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"client-profile",
+										"contacts",
+										"{{uuid_contact}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Удалить контактное лицо",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/client-profile/contacts/{{uuid_contact}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"client-profile",
+										"contacts",
+										"{{uuid_contact}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Договор",
+					"item": [
+						{
+							"name": "Получить  один договор",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Получить список договоров",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"try {",
+											"    // сохраняем id договора из json ответа в переменную окружения",
+											"pm.globals.set(\"variable_key\", \"variable_value\");",
+											"    pm.environment.set(\"id\", pm.response.json().payload.uuid);",
+											"} catch(e) {",
+											"    // выводим исключение в консоль",
+											"    console.log(e);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Редактировать договор (на примере изменения изменения параметра {     \"important_info\": null })",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"important_info\": \"Очень важная инфа!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Назначить сотрудника на договор",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", function () {",
+											"    pm.response.to.have.status(204);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/employee?employee_uuid={{uuid_employee}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"employee"
+									],
+									"query": [
+										{
+											"key": "employee_uuid",
+											"value": "{{uuid_employee}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Снять сотрудника с договора",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", function () {",
+											"    pm.response.to.have.status(204);",
+											"});",
+											"",
+											"//Не понимаю, какое значение должно быть в параметре employee_uuid"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/employee?employee_uuid={{uuid_employee}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"employee"
+									],
+									"query": [
+										{
+											"key": "employee_uuid",
+											"value": "{{uuid_employee}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Получить список прикреплённых файлов (на конкретном примере)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"try {\r",
+											"    // ??!! Почему не хочет сохранять id файла из json ответа в переменную окружения\r",
+											"    pm.environment.set(\"uuid_attach\", pm.response.json().payload.uuid);\r",
+											"} catch(e) {\r",
+											"    // выводим исключение в консоль\r",
+											"    console.log(e);\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans/cd2775f5-9285-4d18-83fb-99a502c442ba/attachments",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"cd2775f5-9285-4d18-83fb-99a502c442ba",
+										"attachments"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Пример с договором, у которого есть файлы",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{Auth}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/loans/cd2775f5-9285-4d18-83fb-99a502c442ba/attachments",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"loans",
+												"cd2775f5-9285-4d18-83fb-99a502c442ba",
+												"attachments"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Fri, 12 Nov 2021 14:09:23 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Request-Id",
+											"value": "158fb534-94f1-4c54-a21a-6939d095b887"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "X-Robots-Tag",
+											"value": "noindex"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"payload\": [\n        {\n            \"uuid\": \"cd2775f5-9285-4d18-83fb-99a502c442ba\",\n            \"loan_uuid\": \"cd2775f5-9285-4d18-83fb-99a502c442ba\",\n            \"name\": \"00dd5f60e297d31eae5bc741d297099258dade0f.html\",\n            \"mime_type\": \"text/html\",\n            \"size\": 55636,\n            \"url\": \"http://dev-collect.apps/api/v1/storage/get-url/1ec41a27-8689-6b70-b8cf-3f8a9df2e04e\",\n            \"created_at\": \"2021-11-10 00:20:52\",\n            \"type\": \"Анкета заемщика\",\n            \"owner\": \"todo ownder\"\n        }\n    ],\n    \"meta\": {\n        \"count\": 0,\n        \"total_count\": 1\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Получить один прикреплённый файл (на конкретном примере)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans/attachments/cd2775f5-9285-4d18-83fb-99a502c442ba",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"attachments",
+										"cd2775f5-9285-4d18-83fb-99a502c442ba"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Пример с реальным файлом",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{Auth}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/loans/attachments/cd2775f5-9285-4d18-83fb-99a502c442ba",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"loans",
+												"attachments",
+												"cd2775f5-9285-4d18-83fb-99a502c442ba"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Fri, 12 Nov 2021 14:13:51 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Request-Id",
+											"value": "c98318a4-dd0d-4ba0-b6ea-fab830743bb6"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "X-Robots-Tag",
+											"value": "noindex"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"payload\": {\n        \"uuid\": \"cd2775f5-9285-4d18-83fb-99a502c442ba\",\n        \"loan_uuid\": \"cd2775f5-9285-4d18-83fb-99a502c442ba\",\n        \"name\": \"00dd5f60e297d31eae5bc741d297099258dade0f.html\",\n        \"mime_type\": \"text/html\",\n        \"size\": 55636,\n        \"url\": \"http://dev-collect.apps/api/v1/storage/get-url/1ec41a27-8689-6b70-b8cf-3f8a9df2e04e\",\n        \"created_at\": \"2021-11-10 00:20:52\",\n        \"type\": \"Анкета заемщика\",\n        \"owner\": \"todo ownder\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Получить историю договора (список)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/history-logs",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"history-logs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Получить список платежей",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/payments",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"payments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Получить исходный графи платежей",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer F9yb0sbQZLUbAGJrPP6tJ9FMraqQKPxUhgf2RMbMsiI.JZsOmKKKZ9lt_6iLGpE1OjiAWql0fUJRDcm3mU0aFYo",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/initial-payment-schedule",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"initial-payment-schedule"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Получить рассчитанный график платежей",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Auth}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/loans/{{loan_id}}/calculated-payment-schedule",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"{{loan_id}}",
+										"calculated-payment-schedule"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Проверка банкротства",
+			"item": [
+				{
+					"name": "Проверка на банкротство (на конкретном примере)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loan_uuids\": [\n        \"39e92009-67b4-4f3a-8fb3-aba440cb4c8b\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/legal/bankrupt/check",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"legal",
+								"bankrupt",
+								"check"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Редактирование",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stage\": \"Реструктуризация долгов\"\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/legal/bankrupt/{{loan_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"legal",
+								"bankrupt",
+								"{{loan_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Запрет на проверку",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"is_blocked\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/legal/bankrupt/{{loan_id}}/block",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"legal",
+								"bankrupt",
+								"{{loan_id}}",
+								"block"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить статус по блокировке на проверку",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/legal/bankrupt/{{loan_id}}/block/status",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"legal",
+								"bankrupt",
+								"{{loan_id}}",
+								"block",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить данные о последней проверке",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/legal/bankrupt/{{loan_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"legal",
+								"bankrupt",
+								"{{loan_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить список банкротов",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/legal/bankrupt",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"legal",
+								"bankrupt"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Проверка подсудности",
+			"item": [
+				{
+					"name": "Добавить информацию по подсудности договора (вручную)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"court\": {\n            \"name\": \"Судебный участок № 396 района Якиманка Центрального административного округа г. Москвы\",\n            \"code\": \"77MS0396\",\n            \"type\": \"federal_court\",\n            \"emails\": \"kazanka@72ms.ru, kazanka2@72ms.ru\",\n            \"phones\": \"Судья: (8-846-39) 2-38-99 Помощник : 0 Секретарь 8(84677)9-13-74\",\n            \"website_url\": \"http://122.sam.msudrf.ru\",\n            \"state_duty\": 35600,\n            \"address\": {\n                \"country\": \"Россия\",\n                \"region\": \"Московская область\",\n                \"locality\": \"Москва\",\n                \"street\": \"Коровий Вал\",\n                \"house\": \"7\",\n                \"apartment\": null,\n                \"post_code\": \"115162\",\n                \"type\": null\n            }\n        },\n        \"court_federal_treasury\": {\n            \"name\": \"Управление Федерального казначейства г Москвы (Инспекция ФНС России №19 по г.Москве)\",\n            \"bank_name\": \"ГУ БАНКА РОССИИ ПО ЦФО//УФК ПО Г. МОСКВЕ г. Москва\",\n            \"bank_account\": \"03100643000000017300\",\n            \"bik\": \"004525988\",\n            \"kpp\": \"771901001\",\n            \"correspondent_account\": \"40102810545370000003\",\n            \"inn\": \"7719107193\",\n            \"kbk\": \"18210803010011050110\",\n            \"oktmo\": \"45314000\",\n            \"ifns\": \"7719\",\n            \"ifns_phones\": \"+7 (495) 400-00-19\",\n            \"website_url\": \"https://www.nalog.ru/rn77/ifns/imns77_19/\",\n            \"address\": {\n                \"country\": \"Россия\",\n                \"region\": \"Московская область\",\n                \"locality\": \"Дмитров\",\n                \"street\": \"Пушкинская\",\n                \"house\": \"73\",\n                \"apartment\": null,\n                \"post_code\": \"141800\",\n                \"type\": null\n            }\n        },\n        \"higher_court\": {\n            \"name\": \"Дмитровский городской суд Московской области\",\n            \"code\": \"50RS0005\",\n            \"type\": \"magistrates_court\",\n            \"emails\": \"dmitrovsud@mail.ru\",\n            \"phones\": \"Один номер на с/у: (49622) 7-30-88\",\n            \"website_url\": \"http://dmitrov.mo.sudrf.ru\",\n            \"state_duty\": null,\n            \"address\": {\n                \"country\": \"Россия\",\n                \"region\": \"Московская область\",\n                \"locality\": \"Дмитров\",\n                \"street\": \"Пушкинская\",\n                \"house\": \"1\",\n                \"apartment\": null,\n                \"post_code\": \"141800\",\n                \"type\": null\n            }\n        },\n        \"higher_court_federal_treasury\": {\n            \"name\": \"Управление Федерального казначейства г Москвы (Инспекция ФНС России №19 по г.Москве)\",\n            \"bank_name\": \"ГУ БАНКА РОССИИ ПО ЦФО УФК ПО Г. МОСКВЕ г. Москва\",\n            \"bank_account\": \"03100643000000017300\",\n            \"bik\": \"004525988\",\n            \"kpp\": \"771901001\",\n            \"correspondent_account\": \"40102810545370000003\",\n            \"inn\": \"7719107193\",\n            \"kbk\": \"18210803010011050110\",\n            \"oktmo\": \"45314000\",\n            \"ifns\": \"7719\",\n            \"ifns_phones\": \"+7 (495) 400-00-19\",\n            \"website_url\": \"https://www.nalog.ru/rn77/ifns/imns77_19/\",\n            \"address\": {\n                \"country\": \"Россия\",\n                \"region\": \"Московская область\",\n                \"locality\": \"Дмитров\",\n                \"street\": \"Пушкинская\",\n                \"house\": \"73\",\n                \"apartment\": null,\n                \"post_code\": \"141800\",\n                \"type\": null\n            }\n        },\n        \"bailiffs_department\": {\n            \"internal_id\": 210,\n            \"name\": \"Измайловский районный отдел судебных приставов ГУФССП России по Москве\",\n            \"emails\": \"osp22@r77.fssprus.ru\",\n            \"phones\": \"4995830461, 4995830464\",\n            \"address\": {\n                \"country\": \"Россия\",\n                \"region\": \"Московская область\",\n                \"locality\": \"Москва\",\n                \"street\": \"7-я Парковая\",\n                \"house\": \"26\",\n                \"apartment\": null,\n                \"post_code\": \"105264\",\n                \"type\": null\n            }\n        }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/loans/{{loan_id}}/jurisdiction",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"{{loan_id}}",
+								"jurisdiction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Отредактировать информацию о подсудности договора (вручную)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"court\": {\r\n        \"website_url\": \"test.test.ru\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/loans/3941cd34-1c12-49f2-a842-0dd0424a0d11/jurisdiction",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"3941cd34-1c12-49f2-a842-0dd0424a0d11",
+								"jurisdiction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Инициировать поиск подсудности по одному договору",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/loans/{{loan_id}}/jurisdiction-searches",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"{{loan_id}}",
+								"jurisdiction-searches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(заполнить Body) Инициировать поиск подсудности по нескольким договорам.",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"loan_uuids\": [\n    \"\",\n    \"\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/loans/jurisdiction-searches",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"jurisdiction-searches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить актуальный статус по проверке подсудности договора",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/loans/{{loan_id}}/jurisdiction-searches?limit=1&order[created_at]=DESC",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"{{loan_id}}",
+								"jurisdiction-searches"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "order[created_at]",
+									"value": "DESC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить информацию о подсудности договора",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/loans/{{loan_id}}/jurisdiction",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"{{loan_id}}",
+								"jurisdiction"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Расчёт задолженности",
+			"item": [
+				{
+					"name": "Получить расчет по кредиту",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/loans/{{loan_id}}/debt-calculation",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"{{loan_id}}",
+								"debt-calculation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновить расчет (на конкретном примере)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/loans/{{loan_id}}/debt-calculation",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"{{loan_id}}",
+								"debt-calculation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Оплата ГП",
+			"item": [
+				{
+					"name": "Интеграция с 1С",
+					"item": [
+						{
+							"name": "Проверить связь с тестовым сервером 1С",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "Fw7Eck",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "ExchangeStateTax",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://10.0.11.189/da_buh_dz_temp/hs/exchange_payment_order/v1/ping",
+									"protocol": "http",
+									"host": [
+										"10",
+										"0",
+										"11",
+										"189"
+									],
+									"path": [
+										"da_buh_dz_temp",
+										"hs",
+										"exchange_payment_order",
+										"v1",
+										"ping"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Создать запрос на оплату ГП (на конкретном договоре)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"try {\r",
+									"    // сохраняем uuid из json ответа в переменную окружения\r",
+									"    pm.environment.set(\"uuid_pay_request\", pm.response.json().payload.uuid);\r",
+									"} catch(e) {\r",
+									"    // выводим исключение в консоль\r",
+									"    console.log(e);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/loans/596dddf7-7cc0-4fac-9cc5-5e1ab64287d5/state-fee-payment-requests",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"596dddf7-7cc0-4fac-9cc5-5e1ab64287d5",
+								"state-fee-payment-requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить один запрос на оплату ГП",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/legal/state-fee-payment-requests/{{uuid_pay_request}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"legal",
+								"state-fee-payment-requests",
+								"{{uuid_pay_request}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить список запросов на оплату ГП",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/legal/state-fee-payment-requests",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"legal",
+								"state-fee-payment-requests"
+							],
+							"query": [
+								{
+									"key": "loan_uuid",
+									"value": "{{loan_id}}",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "\"without_approval\"",
+									"description": "точное совпадение",
+									"disabled": true
+								},
+								{
+									"key": "status_in[]",
+									"value": "\"without_approval\"",
+									"description": "один из",
+									"disabled": true
+								},
+								{
+									"key": "approval_required",
+									"value": "0",
+									"description": "Тип заявки на оплату (1 -- с подтверждением ответст отвественным лицом; 0 -- без подтверждения, создана автоматически)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Подтвердить оплату ГП",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"approved\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/legal/state-fee-payment-requests/{{uuid_pay_request}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"legal",
+								"state-fee-payment-requests",
+								"{{uuid_pay_request}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Отклонить оплату ГП",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"approved\": false,\r\n    \"comment\": \"Не хватает документов для отправки в суд.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/legal/state-fee-payment-requests/{{uuid_pay_request}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"legal",
+								"state-fee-payment-requests",
+								"{{uuid_pay_request}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить настройки оплаты ГП",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/legal/state-fee-payment-settings",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"legal",
+								"state-fee-payment-settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Редактировать настройки оплаты ГП",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    //requests_must_be_approved -- Требуется ли подтверждать запросы ответсвенным сотрудником\r\n    \"requests_must_be_approved\": false,\r\n\r\n    //approve_responsible_employees -- Массив идентификаторов сотрудников, которые отвечают за подтверждение запросов\r\n    \"approve_responsible_employees\": [\r\n        \"1b040921-918e-4bad-ae08-304e2cc4156a\",\r\n        \"2b040921-918e-4bad-ae08-304e2cc4156a\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/legal/state-fee-payment-settings",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"legal",
+								"state-fee-payment-settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Список заявок, ожидающих потверждения",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/legal/state-fee-payment-requests?status=without_approval",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"legal",
+								"state-fee-payment-requests"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "without_approval"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
