@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "4660228d-9624-4f3c-8161-e6d4cd25cc70",
-		"name": "New Collect v.2.4",
+		"name": "New Collect v.2.5",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -824,6 +824,34 @@
 									"path": [
 										"loans",
 										"{{loan_id}}",
+										"client-profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Редактировать анкету",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"passport\": {\r\n        \"series\": \"2130\",\r\n        \"number\": \"130078\",\r\n        \"issue_date\": \"2016-05-19\",\r\n        \"issued_by\": \"Reverse-engineered global artificial intelligence\",\r\n        \"department_code\": \"111-222\",\r\n        \"first_name\": \"Абаджи\",\r\n        \"last_name\": \"Кензи\",\r\n        \"patronymic\": \"МакКензивна\",\r\n        \"date_of_birth\": \"1973-06-29\",\r\n        \"place_of_birth\": \"Expanded composite matrices\"\r\n    },\r\n    \"personal_info\": {\r\n        \"email\": \"Ramon27@gmail.com\",\r\n        \"ssn\": \"1234567\",\r\n        \"inn\": \"\",\r\n        \"time_zone\": \"+03:00\"\r\n    },\r\n    \"family_info\": {\r\n        \"martial_status\": \"married\",\r\n        \"person_count\": \"5+\",\r\n        \"children_count\": \"5+\",\r\n        \"lives_with_parents\": false\r\n    },\r\n    \"work_info\": {\r\n        \"status\": \"employed\",\r\n        \"position\": \"Configuration\",\r\n        \"salary\": \">50\",\r\n        \"additional_income\": \"<10\",\r\n        \"salary_day\": 31,\r\n        \"employer\": \"ООО devim\",\r\n        \"address\": \"77654 Jovani Falls\",\r\n        \"note\": \"Balanced discrete hierarchy\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/loans/a7f6e43e-d110-40a1-8af2-bd3d4a4975cd/client-profile",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"a7f6e43e-d110-40a1-8af2-bd3d4a4975cd",
 										"client-profile"
 									]
 								}
@@ -1828,45 +1856,6 @@
 							]
 						},
 						{
-							"name": "Получить историю договора (список)",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{Auth}}",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "{{host}}/loans/{{loan_id}}/history-logs",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"loans",
-										"{{loan_id}}",
-										"history-logs"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Получить список платежей",
 							"event": [
 								{
@@ -1976,6 +1965,58 @@
 										"loans",
 										"{{loan_id}}",
 										"calculated-payment-schedule"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "История изменения статуса",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/loans/history-status?status=not_bankrupt&from_created_at=2021-12-08&to_created_at=2021-12-14",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"loans",
+										"history-status"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "not_bankrupt"
+										},
+										{
+											"key": "loan_number",
+											"value": "11207-97338",
+											"disabled": true
+										},
+										{
+											"key": "loan_employee_uuid",
+											"value": "8156def7-e5c5-4c85-b8b8-79abfa2b8376",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "1000",
+											"disabled": true
+										},
+										{
+											"key": "from_created_at",
+											"value": "2021-12-08"
+										},
+										{
+											"key": "to_created_at",
+											"value": "2021-12-14"
+										}
 									]
 								}
 							},
@@ -2269,7 +2310,7 @@
 					"response": []
 				},
 				{
-					"name": "(заполнить Body) Инициировать поиск подсудности по нескольким договорам.",
+					"name": "(заполнить Body) Массовое определение подсудности (инициировать поиск по нескольким договорам)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -2282,7 +2323,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"loan_uuids\": [\n    \"\",\n    \"\"\n  ]\n}",
+							"raw": "{\n  \"loan_uuids\": [\n        \"loan_uuid_1\",\n        \"loan_uuid_2\",\n        \"loan_uuid_3\",\n        \"\"\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2363,6 +2404,55 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Получить настройки подсудности договора (проверка блокировки)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/loans/{{loan_id}}/jurisdiction/settings",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"{{loan_id}}",
+								"jurisdiction",
+								"settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Запретить проверку (редактирование настроек)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jurisdiction_changes_blocked\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/loans/{{loan_id}}/jurisdiction/settings",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"{{loan_id}}",
+								"jurisdiction",
+								"settings"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -2402,6 +2492,84 @@
 								"loans",
 								"{{loan_id}}",
 								"debt-calculation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(заполнить Body) Массовый расчёт задолженности",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"loan_uuids\": [\r\n        \"loan_uuid_1\",\r\n        \"loan_uuid_2\",\r\n        \"loan_uuid_3\",\r\n        \"\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/loans/debt-calculation",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"debt-calculation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Шаблоны",
+			"item": [
+				{
+					"name": "Сгенерировать шаблоны документов (анкета, расчёт, заявление)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/loans/{{loan_id}}/template",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"{{loan_id}}",
+								"template"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(заполнить Body) Массовая генерация шаблонов",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"loan_uuids\": [\r\n        \"loan_uuid_1\",\r\n        \"loan_uuid_2\",\r\n        \"loan_uuid_3\",\r\n        \"\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/loans/template",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"loans",
+								"template"
 							]
 						}
 					},
